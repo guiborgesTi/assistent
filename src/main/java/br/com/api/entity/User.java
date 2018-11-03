@@ -38,10 +38,6 @@ public class User {
 
 	@Column(name = "active")
 	private Boolean active;
-	
-	@Column(name = "tempo_expiracao")
-	@NotNull
-	private LocalDateTime tempo;
 
 	public Long getId_usuario() {
 		return id_usuario;
@@ -81,13 +77,5 @@ public class User {
 
 	public void setActive(Boolean active) {
 		this.active = active;
-	}
-
-	public LocalDateTime getTempo() {
-		return tempo;
-	}
-
-	public void setTempo(LocalDateTime tempo) {
-		this.tempo = tempo;
 	}
 }
