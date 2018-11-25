@@ -1,21 +1,15 @@
 package br.com.api.entity;
 
-import java.sql.Time;
-import java.time.LocalDateTime;
-import java.time.Period;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
-import br.com.api.enuns.LevelUsers;
 
 @Entity
 @Table(name = "user_assistent")
@@ -25,7 +19,7 @@ public class UserEntity {
 	@GeneratedValue(generator="user_sequence")
 	@SequenceGenerator(name="user_sequence", sequenceName="id_user")
 	private Long id_usuario;
-	
+
 	@Column(name = "user_name", length = 20)
 	@NotNull
 	private String userName;
@@ -42,6 +36,16 @@ public class UserEntity {
 	private Boolean active;
 
 	@OneToMany(mappedBy="usuario")
+	private List<LoginEntity> login;
+	
+	public Long getId_usuario() {
+		return id_usuario;
+	}
+	
+	public void setId_usuario(Long id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+
 	public String getUserName() {
 		return userName;
 	}
