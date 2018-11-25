@@ -10,3 +10,7 @@ public class AssistentApplication {
 		SpringApplication.run(AssistentApplication.class, args);
 	}
 }
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> migration to github
