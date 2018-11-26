@@ -57,5 +57,4 @@ public class UserController implements Constants {
 		}
 		return new ResponseEntity("Não encontrado!", HttpStatus.NOT_FOUND);
 	}
-	
 }
