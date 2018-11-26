@@ -1,7 +1,6 @@
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
-bin/*
 
 ### STS ###
 .apt_generated
@@ -25,3 +24,7 @@ bin/*
 /dist/
 /nbdist/
 /.nb-gradle/
+
+### Eclipse ###
+
+bin/
