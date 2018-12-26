@@ -16,9 +16,10 @@ import javax.validation.constraints.NotNull;
 public class UserEntity {
 	
 	@Id
+	@Column(name = "id_user_assistent")
 	@GeneratedValue(generator="user_sequence")
 	@SequenceGenerator(name="user_sequence", sequenceName="id_user")
-	private Long id_usuario;
+	private Long idUsuario;
 
 	@Column(name = "user_name", length = 20)
 	@NotNull
@@ -38,12 +39,12 @@ public class UserEntity {
 	@OneToMany(mappedBy="usuario")
 	private List<LoginEntity> login;
 	
-	public Long getId_usuario() {
-		return id_usuario;
+	public Long getIdUsuario() {
+		return idUsuario;
 	}
 	
-	public void setId_usuario(Long id_usuario) {
-		this.id_usuario = id_usuario;
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public String getUserName() {

@@ -36,7 +36,7 @@ public class UserController implements Constants {
 		UserEntity us = userRepository.save(user);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/findUserById/{idUser}")
-					.buildAndExpand(us.getId_usuario()).toUri();
+					.buildAndExpand(us.getIdUsuario()).toUri();
 		 response.setHeader("Location", uri.toASCIIString());
 		return ResponseEntity.created(uri).body(us);
 	}

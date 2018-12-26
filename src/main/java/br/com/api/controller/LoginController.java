@@ -35,22 +35,13 @@ public class LoginController implements Constants {
 	public LoginEntity efetuarLogin(@RequestBody Map<String, String> user) {
 		LoginEntity login = new LoginEntity();
 		if (user != null && !user.isEmpty()) {
-			UserEntity userEnttiy = userRepository.getIdUsuario(user.get("user_name"));
-			LocalDateTime horaLogin = LocalDateTime.now();
-			
-			SimpleDateFormat data = new SimpleDateFormat("hh:mm:sss");
-			
-			Date hora =  Date.from(horaLogin.atZone(ZoneId.systemDefault()).toInstant());
-			
-			try {
-				login.setHoraLogin(data.parse(data.format(hora)));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
- 
+			UserEntity userEnttiy = userRepository.getUsuario(user.get("userName"));
 			login.setUsuario(userEnttiy);
 			repository.save(login);
 		}
-		return repository.findOne(login.getIdLogin());
+		
+		login = repository.findOne(login.getIdLogin());
+		login.setHoraLogin(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+		return login;
 	}
 }

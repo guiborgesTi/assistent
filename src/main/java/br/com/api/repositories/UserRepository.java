@@ -9,5 +9,5 @@ public interface UserRepository extends JpaRepository<UserEntity, Long>{
 	
 	
 	@Query(value="select u from UserEntity u where u.userName=?")
-	UserEntity getIdUsuario(String userName);
+	UserEntity getUsuario(String userName);
 }
