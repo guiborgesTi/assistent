@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,16 +33,32 @@ public class LoginController implements Constants {
 	private UserRepository userRepository;
 	
 	@RequestMapping(path="/efetuarLogin", method=RequestMethod.POST, consumes=JSON, produces=JSON)
-	public LoginEntity efetuarLogin(@RequestBody Map<String, String> user) {
+	public Map<String, Object> efetuarLogin(@RequestBody Map<String, String> user) {
 		LoginEntity login = new LoginEntity();
 		if (user != null && !user.isEmpty()) {
 			UserEntity userEnttiy = userRepository.getUsuario(user.get("userName"));
+			LocalDateTime horaLogin = LocalDateTime.now();
+			
+			SimpleDateFormat data = new SimpleDateFormat("hh:mm:sss");
+			
+			Date hora =  Date.from(horaLogin.atZone(ZoneId.systemDefault()).toInstant());
+			
+			try {
+				login.setHoraLogin(data.parse(data.format(hora)));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+ 
 			login.setUsuario(userEnttiy);
 			repository.save(login);
 		}
-		
 		login = repository.findOne(login.getIdLogin());
-		login.setHoraLogin(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
-		return login;
+		
+		Map<String, Object> response = new HashMap<>();
+		response.put("login", login);
+		response.put("hora", LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+		
+		return response;
+		
 	}
 }

@@ -1,6 +1,7 @@
 package br.com.api.entity;
 
 
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import javax.persistence.Transient;
-
 @Entity
 @Table(name="login")
 public class LoginEntity {
@@ -24,12 +23,11 @@ public class LoginEntity {
 	private Long idLogin; 
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="id_usuario")
+	@JoinColumn(name="id_user_assistent")
 	private UserEntity usuario;
 	
 	@Column(name="hora_login")
-	@Transient
-	private String horaLogin;
+	private Date horaLogin;
 	
 	public Long getIdLogin() {
 		return idLogin;
@@ -47,11 +45,11 @@ public class LoginEntity {
 		this.usuario = usuario;
 	}
 
-	public String getHoraLogin() {
+	public Date getHoraLogin() {
 		return horaLogin;
 	}
 
-	public void setHoraLogin(String horaLogin) {
+	public void setHoraLogin(Date horaLogin) {
 		this.horaLogin = horaLogin;
 	}
 }
